@@ -3,6 +3,7 @@ package com.codepath.apps.restclienttemplate;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> {
 
@@ -50,6 +54,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         // populate the views according to this data
         viewHolder.tvUsername.setText(tweet.user.name);
         viewHolder.tvBody.setText(tweet.body);
+        viewHolder.tvDate.setText(getRelativeTimeAgo(tweet.createdAt));
 
         Glide.with(context)
                 .load(tweet.user.profileImageUrl)
@@ -67,6 +72,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public ImageView ivProfileImage;
         public TextView tvUsername;
         public TextView tvBody;
+        public TextView tvDate;
 
         public ViewHolder (View itemView) {
             super(itemView);
@@ -76,6 +82,50 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
+            tvDate = (TextView) itemView.findViewById(R.id.tvDate);
         }
+    }
+
+    // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
+    // This function uses the "created_at" variable of the tweet class
+    // and returns a string with the time since it was created
+    public String getRelativeTimeAgo(String rawJsonDate) {
+        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+        sf.setLenient(true);
+
+        String relativeDate = "";
+        try {
+            long dateMillis = sf.parse(rawJsonDate).getTime();
+            relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
+                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS, DateUtils.FORMAT_ABBREV_ALL).toString();
+            if (relativeDate.contains("hr")) {
+                return shorten(relativeDate, 'h');
+            } else if (relativeDate.contains("sec")) {
+                return shorten(relativeDate, 's');
+            } else if (relativeDate.contains("min")) {
+                return shorten(relativeDate, 'm');
+            } else if (relativeDate.contains("day")) {
+                return shorten(relativeDate, 'd');
+            } else if (relativeDate.contains("y")) {
+                return shorten(relativeDate, 'y');
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return relativeDate;
+    }
+
+    // Removes the space between the number and string
+    // i.e. '4 min. ago' --> '4min. ago'
+    private static String charRemoveAt(String str, int p) {
+        return str.substring(0,p-1) + str.substring(p);
+    }
+
+    // Removes anything after the first char
+    // (i.e. '4min. ago' --> '4m'
+    private static String shorten(String str, char ch) {
+        str = charRemoveAt(str, str.indexOf(ch));
+        return str.substring(0,str.indexOf(ch)+1);
     }
 }
