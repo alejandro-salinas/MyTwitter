@@ -20,15 +20,17 @@ import cz.msebera.android.httpclient.Header;
 public class ComposeActivity extends AppCompatActivity {
     // reference to twitter client
     private TwitterClient client;
-    private Button button;
+    private Button tweetButton;
+    private Button cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
         client = TwitterApp.getRestClient(this);
-        button = (Button) findViewById(R.id.tweetButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        // Adds onClickListener to tweetButton and send network request when clicked
+        tweetButton = (Button) findViewById(R.id.tweetButton);
+        tweetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Gets the body of the tweet
@@ -52,6 +54,15 @@ public class ComposeActivity extends AppCompatActivity {
                         Toast.makeText(ComposeActivity.this, errorResponse.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        // Adds onClickListener to cancelButton and returns to TimelineActivity
+        cancelButton = (Button) findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
