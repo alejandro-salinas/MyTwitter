@@ -16,8 +16,8 @@
         android:hint="What's happening?"
         android:inputType="textMultiLine|text|textCapSentences"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_circular_Profile_Image"
-        app:layout_constraintTop_toTopOf="@+id/iv_circular_Profile_Image" />
+        app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
+        app:layout_constraintTop_toTopOf="@+id/ivProfileImage" />
 
     <Button
         android:id="@+id/tweetButton"
@@ -34,8 +34,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/iv_circular_Profile_Image"
+    <ImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ivProfileImage"
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:layout_marginStart="16dp"
@@ -51,11 +51,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="0/140"
+        android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="@color/twitter_blue"
-        app:layout_constraintEnd_toEndOf="@+id/iv_circular_Profile_Image"
-        app:layout_constraintStart_toStartOf="@+id/iv_circular_Profile_Image"
-        app:layout_constraintTop_toBottomOf="@+id/iv_circular_Profile_Image" />
+        app:layout_constraintEnd_toEndOf="@+id/ivProfileImage"
+        app:layout_constraintStart_toStartOf="@+id/ivProfileImage"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfileImage" />
 
     <ImageView
         android:id="@+id/ivCancel"
@@ -64,8 +65,8 @@
         android:clickable="true"
         android:tint="@color/twitter_blue"
         app:layout_constraintBottom_toBottomOf="@+id/tweetButton"
-        app:layout_constraintEnd_toEndOf="@+id/iv_circular_Profile_Image"
-        app:layout_constraintStart_toStartOf="@+id/iv_circular_Profile_Image"
+        app:layout_constraintEnd_toEndOf="@+id/ivProfileImage"
+        app:layout_constraintStart_toStartOf="@+id/ivProfileImage"
         app:layout_constraintTop_toTopOf="@+id/tweetButton"
         app:srcCompat="@drawable/ic_vector_close" />
 

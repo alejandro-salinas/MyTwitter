@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -40,28 +41,7 @@ public class ComposeActivity extends AppCompatActivity {
         client = TwitterApp.getRestClient(this);
         final Context context = getApplicationContext();
 
-        // Send network request to get user
-        client.getUser(new JsonHttpResponseHandler() { // Attempted to use a network call to find the User
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    user = (User) User.fromJSON(response); // Unable to find user
-                    // Uses glide to upload the photo
-                    Glide.with(context)
-                            .load(user.profileImageUrl)
-                            .into((ImageView) findViewById(R.id.iv_circular_Profile_Image));
-
-                    Log.d("onSuccess", "User successfully retrieved");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Log.d("TwitterClient", errorResponse.toString());
-            }
-        });
+        uploadUserImage(client);
 
         // Adds onClickListener to tweetButton and send network request when clicked
         tweetButton = (Button) findViewById(R.id.tweetButton);
@@ -134,6 +114,32 @@ public class ComposeActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Uses network request and glide to upload image
+    public void uploadUserImage(TwitterClient client) {
+        // Send network request to get user
+        client.getUser(new JsonHttpResponseHandler() { // Attempted to use a network call to find the User
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    user = (User) User.fromJSON(response); // Unable to find user
+                    // Uses glide to upload the photo
+                    Glide.with(getApplicationContext())
+                            .load(user.profileImageUrl)
+                            .apply(RequestOptions.circleCropTransform())
+                            .into((ImageView) findViewById(R.id.ivProfileImage));
+
+                    Log.d("onSuccess", "User successfully retrieved");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Log.d("TwitterClient", errorResponse.toString());
+            }
+        });}
 
     // Returns tweet in the intent as a result
     public void returnTweet(Tweet tweet) {

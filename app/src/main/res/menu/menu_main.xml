@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/miCompose"
-        android:icon="@drawable/ic_compose"
-        app:showAsAction="ifRoom"
+        android:checkable="true"
+        android:icon="@drawable/ic_vector_compose"
+        android:onClick="onComposeAction"
         android:title="Compose"
-        android:onClick="onComposeAction">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/miProfile"
@@ -15,4 +16,12 @@
         android:title="Profile"
         android:onClick="onProfileAction">
     </item>
+    <item
+        android:id="@+id/miActionProgress"
+        android:title="Loading..."
+        android:visible="false"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        app:actionLayout="@layout/action_view_progress" />
+
 </menu>
