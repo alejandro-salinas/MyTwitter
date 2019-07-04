@@ -29,7 +29,7 @@ public class ComposeActivity extends AppCompatActivity {
     // reference to twitter client
     private TwitterClient client;
     private Button tweetButton;
-    private TextView tvCancel;
+    private ImageView ivCancel;
     private User user;
     private TextView tvCount;
 
@@ -94,8 +94,8 @@ public class ComposeActivity extends AppCompatActivity {
         });
 
         // Adds onClickListener to cancelButton and returns to TimelineActivity
-        tvCancel = (TextView) findViewById(R.id.tvCancel);
-        tvCancel.setOnClickListener(new View.OnClickListener() {
+        ivCancel = (ImageView) findViewById(R.id.ivCancel);
+        ivCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -117,7 +117,6 @@ public class ComposeActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
                 // Fires right before the text is changed
-
             }
 
             @Override
