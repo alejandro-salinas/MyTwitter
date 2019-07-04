@@ -4,7 +4,7 @@
     <item
         android:id="@+id/miCompose"
         android:checkable="true"
-        android:icon="@drawable/ic_vector_compose"
+        android:icon="@drawable/ic_vector_compose_fab"
         android:onClick="onComposeAction"
         android:title="Compose"
         app:showAsAction="ifRoom">
@@ -23,5 +23,4 @@
         android:orderInCategory="100"
         app:showAsAction="always"
         app:actionLayout="@layout/action_view_progress" />
-
 </menu>
