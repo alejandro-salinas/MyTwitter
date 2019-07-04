@@ -11,6 +11,8 @@ public class Tweet {
     public long uid; // database ID for the tweet
     public User user;
     public String createdAt;
+    public String reTweet_count;
+    public String favorite_count;
 
     // Empty function for parecler
     public Tweet() {
@@ -26,6 +28,8 @@ public class Tweet {
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+        tweet.reTweet_count = "" + jsonObject.getInt("retweet_count");
+        tweet.favorite_count = "" + jsonObject.getInt("favorite_count");
 
         return tweet;
     }
