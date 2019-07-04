@@ -5,6 +5,5 @@
     <string name="login_label" translatable="false">Log in</string>
     <string name="intent_scheme" translatable="false">oauth</string>
     <string name="intent_host" translatable="false">cprest</string>
-    <string name="network_unreachable">Unable to update timeline. Network currently unavailable.</string>
 
 </resources>

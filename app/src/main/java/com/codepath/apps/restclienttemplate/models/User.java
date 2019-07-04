@@ -2,16 +2,20 @@ package com.codepath.apps.restclienttemplate.models;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
-import java.io.Serializable;
-
-public class User implements Serializable {
+@Parcel()
+public class User {
 
     // list the attributes
     public String name;
     public long uid;
     public String screenName;
     public String profileImageUrl;
+
+    public User() {
+
+    }
 
     // deserialize the JSON
     public static User fromJSON(JSONObject json) throws JSONException {
@@ -21,8 +25,11 @@ public class User implements Serializable {
         user.name = json.getString("name");
         user.uid = json.getLong("id");
         user.screenName = json.getString("screen_name");
-        user.profileImageUrl = json.getString("profile_image_url_https");
-
+        String image = json.getString("profile_image_url_https");
+        if (image.contains("normal.jpg")) {
+            image = image.substring(0, image.indexOf("normal.jpg")) + "bigger.jpg";
+        }
+        user.profileImageUrl = image;
     return user;
     }
 }

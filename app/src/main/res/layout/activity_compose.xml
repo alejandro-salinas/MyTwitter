@@ -11,13 +11,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="#FAFAFA"
         android:hint="What's happening?"
         android:inputType="textMultiLine|text|textCapSentences"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profile_image"
-        app:layout_constraintTop_toBottomOf="@+id/tweetButton"></EditText>
+        app:layout_constraintStart_toEndOf="@+id/iv_circular_Profile_Image"
+        app:layout_constraintTop_toTopOf="@+id/iv_circular_Profile_Image" />
 
     <Button
         android:id="@+id/tweetButton"
@@ -26,32 +26,47 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="Tweet"
+        android:textColor="#FAFAFA"
+        android:background="@drawable/tweetbutton"
+        android:backgroundTint="@color/twitter_blue"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/cancelButton"
+    <TextView
+        android:id="@+id/tvCancel"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@android:string/cancel"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:clickable="true"
+        android:text="Cancel"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/twitter_blue"
         app:layout_constraintBottom_toBottomOf="@+id/tweetButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tweetButton" />
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/iv_circular_Profile_Image"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:background="#00F10000"
-        android:visibility="visible"
         android:src="@android:color/black"
-        app:civ_border_color="@android:color/darker_gray"
-        app:civ_border_width="2dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cancelButton" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCancel" />
+
+    <TextView
+        android:id="@+id/tvCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="0/140"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/twitter_blue"
+        app:layout_constraintEnd_toEndOf="@+id/iv_circular_Profile_Image"
+        app:layout_constraintStart_toStartOf="@+id/iv_circular_Profile_Image"
+        app:layout_constraintTop_toBottomOf="@+id/iv_circular_Profile_Image" />
 
 </android.support.constraint.ConstraintLayout>

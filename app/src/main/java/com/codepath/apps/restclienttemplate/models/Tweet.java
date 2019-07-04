@@ -2,15 +2,20 @@ package com.codepath.apps.restclienttemplate.models;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
-import java.io.Serializable;
-
-public class Tweet implements Serializable {
-    // list out the attributes
+@Parcel // Need to implement in gradle
+public class Tweet {
+    // list out the attributes, must be public for parcel
     public String body;
     public long uid; // database ID for the tweet
     public User user;
     public String createdAt;
+
+    // Empty function for parecler
+    public Tweet() {
+
+    }
 
     // deserialize the JSON
     public static Tweet fromJSON(JSONObject jsonObject) throws JSONException {

@@ -50,4 +50,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     // Allows images to be circular
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+    // Paceler
+    implementation 'org.parceler:parceler-api:1.1.12'
+    annotationProcessor 'org.parceler:parceler:1.1.12'
 }
