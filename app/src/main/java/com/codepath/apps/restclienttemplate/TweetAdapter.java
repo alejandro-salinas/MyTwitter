@@ -89,23 +89,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             viewHolder.tvRetweet.setTextColor(context.getResources().getColor(R.color.icon_default));
         }
 
-        // Adds listeners to each icon
-        viewHolder.ivReply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "Reply to this tweet", Toast.LENGTH_LONG).show();
-                int position = viewHolder.getAdapterPosition();
-                // make sure the position is valid, i.e. actually exists in the view
-                if (position != RecyclerView.NO_POSITION) {
-                    // get the movie at the position, this won't work if the class is static
-                    Tweet tweet = mTweets.get(position);
-                    Intent intent = new Intent(context, ReplyActivity.class);
-                    // serialize the movie using parceler, use its short name as a key
-                    intent.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
-                    context.startActivity(intent);
-                }
-            }
-        });
+        //Add Listeners to each object of the tweet that needs one
+        addListenersToTweet(viewHolder);
     }
 
     @Override
@@ -142,6 +127,47 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             ivReply = (ImageView) itemView.findViewById(R.id.ivReply);
         }
     }
+
+    // Adds listeners to each icon that needs one
+    public void addListenersToTweet(final ViewHolder viewHolder) {
+
+        // Reply Button
+        viewHolder.ivReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Reply to this tweet", Toast.LENGTH_LONG).show();
+                int position = viewHolder.getAdapterPosition();
+                // make sure the position is valid, i.e. actually exists in the view
+                if (position != RecyclerView.NO_POSITION) {
+                    // get the movie at the position, this won't work if the class is static
+                    Tweet tweet = mTweets.get(position);
+                    Intent intent = new Intent(context, ReplyActivity.class);
+                    // serialize the movie using parceler, use its short name as a key
+                    intent.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
+                    context.startActivity(intent);
+                }
+            }
+        });
+
+        // Profile Image
+        viewHolder.ivProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Clicked on a profile image", Toast.LENGTH_LONG).show();
+                int position = viewHolder.getAdapterPosition();
+                // make sure the position is valid, i.e. actually exists in the view
+                if (position != RecyclerView.NO_POSITION) {
+                    // get the movie at the position, this won't work if the class is static
+                    Tweet tweet = mTweets.get(position);
+                    Intent intent = new Intent(context, UserProfileActivity.class);
+                    // serialize the movie using parceler, could have passed user
+                    intent.putExtra("user", Parcels.wrap(tweet.user));
+                    context.startActivity(intent);
+                }
+            }
+        });
+    }
+
 
     // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
     // This function uses the "created_at" variable of the tweet class

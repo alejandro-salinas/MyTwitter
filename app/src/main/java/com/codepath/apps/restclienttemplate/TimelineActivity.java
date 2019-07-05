@@ -31,8 +31,8 @@ public class TimelineActivity extends AppCompatActivity {
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
-    // Request code for intent
-    private final int REQUEST_CODE = 20;
+    // Request codes for intent
+    private final int REQUEST_CODE_COMPOSE = 20;
     // Used to refresh
     private SwipeRefreshLayout swipeContainer;
     // Instance of the progress action-view
@@ -200,22 +200,25 @@ public class TimelineActivity extends AppCompatActivity {
     public void onComposeAction(MenuItem mi) {
         Toast.makeText(TimelineActivity.this, "Compose a new tweet", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(TimelineActivity.this, ComposeActivity.class);
-        startActivityForResult(intent, REQUEST_CODE);
-    }
-
-    public void onProfileAction(MenuItem mi) {
-        Toast.makeText(TimelineActivity.this, "See profile", Toast.LENGTH_LONG).show();
+        startActivityForResult(intent, REQUEST_CODE_COMPOSE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         // Makes sure we returned a success and the request belonged to onComposeAction
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_COMPOSE) {
             // Extract tweet
             Tweet tweet = (Tweet) data.getParcelableExtra("tweet");
             tweets.add(0, tweet);
             tweetAdapter.notifyItemInserted(0);
             rvTweets.scrollToPosition(0);
         }
+    }
+
+    // Sends a network to get User uid, and passes it in an intent to profile activity
+    public void onProfileAction(MenuItem mi) {
+        Toast.makeText(TimelineActivity.this, "See profile", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(TimelineActivity.this, MyProfileActivity.class);
+        startActivity(intent);
     }
 }

@@ -12,6 +12,8 @@ public class User {
     public long uid;
     public String screenName;
     public String profileImageUrl;
+    public String profileBannerUrl;
+    public String description;
 
     public User() {
 
@@ -25,6 +27,10 @@ public class User {
         user.name = json.getString("name");
         user.uid = json.getLong("id");
         user.screenName = json.getString("screen_name");
+        user.profileBannerUrl = json.getString("profile_banner_url");
+        user.description = json.getString("description");
+
+        // Parses URL for higher quality profile image
         String image = json.getString("profile_image_url_https");
         if (image.contains("normal.jpg")) {
             image = image.substring(0, image.indexOf("normal.jpg")) + "bigger.jpg";

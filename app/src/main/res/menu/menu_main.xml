@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/miCompose"
-        android:checkable="true"
         android:icon="@drawable/ic_vector_compose_fab"
         android:onClick="onComposeAction"
         android:title="Compose"
@@ -12,9 +11,9 @@
     <item
         android:id="@+id/miProfile"
         android:icon="@drawable/ic_profile"
-        app:showAsAction="ifRoom|withText"
+        android:onClick="onProfileAction"
         android:title="Profile"
-        android:onClick="onProfileAction">
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/miActionProgress"

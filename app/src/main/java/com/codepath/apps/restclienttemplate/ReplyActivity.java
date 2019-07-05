@@ -76,7 +76,7 @@ public class ReplyActivity extends AppCompatActivity {
     // Uses network request and glide to upload image
     public void uploadUserImage(TwitterClient client) {
         // Send network request to get user
-        client.getUser(new JsonHttpResponseHandler() { // Attempted to use a network call to find the User
+        client.getMyUser(new JsonHttpResponseHandler() { // Attempted to use a network call to find the User
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {

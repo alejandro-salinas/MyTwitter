@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class ComposeActivity extends AppCompatActivity {
-    // reference to twitter client
+    // Instances
     private TwitterClient client;
     private Button tweetButton;
     private ImageView ivCancel;
@@ -68,11 +68,11 @@ public class ComposeActivity extends AppCompatActivity {
     // Uses network request and glide to upload image
     public void uploadUserImage() {
         // Send network request to get user
-        client.getUser(new JsonHttpResponseHandler() { // Attempted to use a network call to find the User
+        client.getMyUser(new JsonHttpResponseHandler() { // Attempted to use a network call to find the User
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    user = (User) User.fromJSON(response); // Unable to find user
+                    user = (User) User.fromJSON(response);
                     // Uses glide to upload the photo
                     Glide.with(getApplicationContext())
                             .load(user.profileImageUrl)

@@ -64,12 +64,12 @@ public class TwitterClient extends OAuthBaseClient {
 		client.post(apiUrl, params, handler);
 	}
 
-	// Gets user, need to add param for user name
-	// Created this API endpoint to access data about a given user
-	public void getUser(AsyncHttpResponseHandler handler) {
+	// Returns user associated with login
+	public void getMyUser(AsyncHttpResponseHandler handler) {
 		String apiUrl = getApiUrl("account/verify_credentials.json");
 		client.get(apiUrl, handler); // No Params are needed
 	}
+
 
 	/* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
 	 * 	  i.e getApiUrl("statuses/home_timeline.json");

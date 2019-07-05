@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+    <android.support.constraint.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/ivMyBanner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/black" />
+
+        <ImageView
+            android:id="@+id/ivMyProfileImage"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivMyBanner"
+            app:srcCompat="@color/icon_default" />
+
+        <ImageView
+            android:id="@+id/ivMyProfileClose"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:tint="@color/twitter_blue"
+            app:layout_constraintStart_toStartOf="@+id/ivMyBanner"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_vector_close" />
+
+        <TextView
+            android:id="@+id/tvMyProfileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Username"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ivMyProfileImage"
+            app:layout_constraintTop_toTopOf="@+id/ivMyProfileImage" />
+
+        <TextView
+            android:id="@+id/tvMyProfileScreenName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Screenname"
+            app:layout_constraintStart_toStartOf="@+id/tvMyProfileName"
+            app:layout_constraintTop_toBottomOf="@+id/tvMyProfileName" />
+
+        <TextView
+            android:id="@+id/tvMyProfileDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:autoLink="all"
+            android:linksClickable="true"
+            android:text="Description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivMyProfileImage" />
+
+        <TextView
+            android:id="@+id/tvFollowingCount"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:text="222"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tvMyProfileDescription"
+            app:layout_constraintTop_toBottomOf="@+id/tvMyProfileDescription" />
+
+        <TextView
+            android:id="@+id/tvFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Following"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/tvFollowingCount"
+            app:layout_constraintTop_toTopOf="@+id/tvFollowingCount" />
+
+        <TextView
+            android:id="@+id/tvFollowersCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="222"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tvFollowing"
+            app:layout_constraintTop_toTopOf="@+id/tvFollowing" />
+
+        <TextView
+            android:id="@+id/tvFollowers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Followers"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/tvFollowersCount"
+            app:layout_constraintTop_toTopOf="@+id/tvFollowersCount" />
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
