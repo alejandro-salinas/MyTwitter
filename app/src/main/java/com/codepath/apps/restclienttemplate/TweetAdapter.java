@@ -65,6 +65,22 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                 .load(tweet.user.profileImageUrl)
                 .apply(RequestOptions.circleCropTransform())
                 .into(viewHolder.ivProfileImage);
+
+        // Edits image view if tweet has been favorited/retweeted by user
+        if (tweet.favorited) {
+            viewHolder.ivFavorite.setImageResource(R.drawable.ic_vector_heart);
+            viewHolder.tvFavorite.setTextColor(context.getResources().getColor(R.color.inline_action_like));
+        } else {
+            viewHolder.ivFavorite.setImageResource(R.drawable.ic_vector_heart_stroke);
+            viewHolder.tvFavorite.setTextColor(context.getResources().getColor(R.color.icon_default));
+        }
+        if (tweet.retweeted) {
+            viewHolder.ivRetweet.setImageResource(R.drawable.ic_vector_retweet);
+            viewHolder.tvRetweet.setTextColor(context.getResources().getColor(R.color.medium_green));
+        } else {
+            viewHolder.ivRetweet.setImageResource(R.drawable.ic_vector_retweet_stroke);
+            viewHolder.tvRetweet.setTextColor(context.getResources().getColor(R.color.icon_default));
+        }
     }
 
     @Override
@@ -81,6 +97,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvScreenName;
         public TextView tvRetweet;
         public TextView tvFavorite;
+        public ImageView ivRetweet;
+        public ImageView ivFavorite;
 
         public ViewHolder (View itemView) {
             super(itemView);
@@ -93,6 +111,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvScreenName = (TextView) itemView.findViewById(R.id.tvScreenName);
             tvRetweet = (TextView) itemView.findViewById(R.id.tvRetweet);
             tvFavorite = (TextView) itemView.findViewById(R.id.tvFavorite);
+            ivRetweet = (ImageView) itemView.findViewById(R.id.ivRetweet);
+            ivFavorite = (ImageView) itemView.findViewById(R.id.ivFavorite);
         }
     }
 

@@ -69,9 +69,8 @@
         android:id="@+id/ivRetweet"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="48dp"
         android:clickable="true"
-        android:tint="@color/icon_default"
         app:layout_constraintStart_toEndOf="@+id/ivReply"
         app:layout_constraintTop_toTopOf="@+id/ivReply"
         app:srcCompat="@drawable/ic_vector_retweet_stroke" />
@@ -79,7 +78,7 @@
     <TextView
         android:id="@+id/tvRetweet"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:gravity="center_vertical"
         android:text="222"
@@ -94,7 +93,6 @@
         android:layout_height="16dp"
         android:layout_marginStart="64dp"
         android:clickable="true"
-        android:tint="@color/icon_default"
         app:layout_constraintStart_toEndOf="@+id/ivRetweet"
         app:layout_constraintTop_toTopOf="@+id/ivRetweet"
         app:srcCompat="@drawable/ic_vector_heart_stroke" />

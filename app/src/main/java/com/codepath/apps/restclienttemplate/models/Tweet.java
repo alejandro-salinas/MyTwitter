@@ -13,6 +13,8 @@ public class Tweet {
     public String createdAt;
     public String reTweet_count;
     public String favorite_count;
+    public boolean favorited;
+    public boolean retweeted;
 
     // Empty function for parecler
     public Tweet() {
@@ -30,6 +32,8 @@ public class Tweet {
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
         tweet.reTweet_count = "" + jsonObject.getInt("retweet_count");
         tweet.favorite_count = "" + jsonObject.getInt("favorite_count");
+        tweet.favorited = jsonObject.getBoolean("favorited");
+        tweet.retweeted = jsonObject.getBoolean("retweeted");
 
         return tweet;
     }
