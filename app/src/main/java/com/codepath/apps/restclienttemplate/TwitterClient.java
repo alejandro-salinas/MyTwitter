@@ -49,6 +49,7 @@ public class TwitterClient extends OAuthBaseClient {
 		RequestParams params = new RequestParams();
 		params.put("count", 25);
 		params.put("since_id", 1);
+		params.put("tweet_mode", "extended");
 		// 1 = means when we pull to refresh, we get the latest tweets
 		// that are greater than the ones on the screen
 		client.get(apiUrl, params, handler);
@@ -67,7 +68,7 @@ public class TwitterClient extends OAuthBaseClient {
 	// Created this API endpoint to access data about a given user
 	public void getUser(AsyncHttpResponseHandler handler) {
 		String apiUrl = getApiUrl("account/verify_credentials.json");
-		client.get(apiUrl, handler); // No Params were entered, could be the issue
+		client.get(apiUrl, handler); // No Params are needed
 	}
 
 	/* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
