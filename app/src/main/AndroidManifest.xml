@@ -17,6 +17,10 @@
             android:name=".ComposeActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".ReplyActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".TimelineActivity" />
         <activity
             android:name=".LoginActivity"

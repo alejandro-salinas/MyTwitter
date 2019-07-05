@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ReplyActivity">
+
+    <EditText
+        android:id="@+id/etTweetBodyReply"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/white"
+        android:hint="What's happening?"
+        android:inputType="textMultiLine|text|textCapSentences"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivProfileImageReply"
+        app:layout_constraintTop_toBottomOf="@+id/tvReplyingTo" />
+
+    <Button
+        android:id="@+id/tweetButtonReply"
+        android:layout_width="68dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/tweetbutton"
+        android:backgroundTint="@color/twitter_blue"
+        android:padding="0dp"
+        android:text="Reply"
+        android:textAllCaps="false"
+        android:textColor="#FAFAFA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ivProfileImageReply"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="#00F10000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivCancelReply"
+        app:srcCompat="@drawable/ic_vector_person_stroke" />
+
+    <TextView
+        android:id="@+id/tvCountReply"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="0/140"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/twitter_blue"
+        app:layout_constraintEnd_toEndOf="@+id/ivProfileImageReply"
+        app:layout_constraintStart_toStartOf="@+id/ivProfileImageReply"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfileImageReply" />
+
+    <ImageView
+        android:id="@+id/ivCancelReply"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:clickable="true"
+        android:tint="@color/twitter_blue"
+        app:layout_constraintBottom_toBottomOf="@+id/tweetButtonReply"
+        app:layout_constraintEnd_toEndOf="@+id/ivProfileImageReply"
+        app:layout_constraintStart_toStartOf="@+id/ivProfileImageReply"
+        app:layout_constraintTop_toTopOf="@+id/tweetButtonReply"
+        app:srcCompat="@drawable/ic_vector_close" />
+
+    <TextView
+        android:id="@+id/tvReplyingTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="Reply"
+        app:layout_constraintStart_toEndOf="@+id/ivProfileImageReply"
+        app:layout_constraintTop_toTopOf="@+id/ivProfileImageReply" />
 
 </android.support.constraint.ConstraintLayout>

@@ -196,6 +196,7 @@ public class TimelineActivity extends AppCompatActivity {
         // Hide progress item
         miActionProgressItem.setVisible(false);
     }
+
     public void onComposeAction(MenuItem mi) {
         Toast.makeText(TimelineActivity.this, "Compose a new tweet", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(TimelineActivity.this, ComposeActivity.class);

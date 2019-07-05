@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
@@ -9,10 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+
+import org.parceler.Parcels;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +24,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> {
+
+    // Request code for intent
+    private final int REQUEST_CODE = 20;
 
     private List<Tweet> mTweets;
     Context context; // Instance so that Glide can reference it
@@ -81,6 +88,24 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             viewHolder.ivRetweet.setImageResource(R.drawable.ic_vector_retweet_stroke);
             viewHolder.tvRetweet.setTextColor(context.getResources().getColor(R.color.icon_default));
         }
+
+        // Adds listeners to each icon
+        viewHolder.ivReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Reply to this tweet", Toast.LENGTH_LONG).show();
+                int position = viewHolder.getAdapterPosition();
+                // make sure the position is valid, i.e. actually exists in the view
+                if (position != RecyclerView.NO_POSITION) {
+                    // get the movie at the position, this won't work if the class is static
+                    Tweet tweet = mTweets.get(position);
+                    Intent intent = new Intent(context, ReplyActivity.class);
+                    // serialize the movie using parceler, use its short name as a key
+                    intent.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
+                    context.startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
@@ -99,6 +124,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvFavorite;
         public ImageView ivRetweet;
         public ImageView ivFavorite;
+        public ImageView ivReply;
 
         public ViewHolder (View itemView) {
             super(itemView);
@@ -113,6 +139,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvFavorite = (TextView) itemView.findViewById(R.id.tvFavorite);
             ivRetweet = (ImageView) itemView.findViewById(R.id.ivRetweet);
             ivFavorite = (ImageView) itemView.findViewById(R.id.ivFavorite);
+            ivReply = (ImageView) itemView.findViewById(R.id.ivReply);
         }
     }
 
@@ -162,12 +189,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     // Clean all elements of the recycler
     public void clear() {
         mTweets.clear();
-        notifyDataSetChanged();
-    }
-
-    // Add a list of items -- change to type used
-    public void addAll(List<Tweet> list) {
-        mTweets.addAll(list);
         notifyDataSetChanged();
     }
 }
