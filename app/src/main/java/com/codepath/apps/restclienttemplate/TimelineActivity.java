@@ -32,7 +32,7 @@ public class TimelineActivity extends AppCompatActivity {
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
     // Request codes for intent
-    private final int REQUEST_CODE_COMPOSE = 20;
+    private final int REQUEST_CODE = 20;
     // Used to refresh
     private SwipeRefreshLayout swipeContainer;
     // Instance of the progress action-view
@@ -122,10 +122,12 @@ public class TimelineActivity extends AppCompatActivity {
         // Send the network request to fetch the updated data
         // `client` here is an instance of Android Async HTTP
         // getHomeTimeline is an example endpoint.
+        showProgressBar();
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d("TwitterClient", response.toString());
+                hideProgressBar();
             }
 
             @Override
@@ -145,6 +147,7 @@ public class TimelineActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+                hideProgressBar();
                 // Now we call setRefreshing(false) to signal refresh has finished
                 swipeContainer.setRefreshing(false);
             }
@@ -153,18 +156,21 @@ public class TimelineActivity extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.d("TwitterClient", responseString);
                 throwable.printStackTrace();
+                hideProgressBar();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                 Log.d("TwitterClient", errorResponse.toString());
                 throwable.printStackTrace();
+                hideProgressBar();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.d("TwitterClient", errorResponse.toString());
                 throwable.printStackTrace();
+                hideProgressBar();
             }
         });
     }
@@ -200,13 +206,13 @@ public class TimelineActivity extends AppCompatActivity {
     public void onComposeAction(MenuItem mi) {
         Toast.makeText(TimelineActivity.this, "Compose a new tweet", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(TimelineActivity.this, ComposeActivity.class);
-        startActivityForResult(intent, REQUEST_CODE_COMPOSE);
+        startActivityForResult(intent, REQUEST_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         // Makes sure we returned a success and the request belonged to onComposeAction
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_COMPOSE) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             // Extract tweet
             Tweet tweet = (Tweet) data.getParcelableExtra("tweet");
             tweets.add(0, tweet);

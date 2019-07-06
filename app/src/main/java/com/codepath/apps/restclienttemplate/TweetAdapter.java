@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -29,7 +30,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     private final int REQUEST_CODE = 20;
 
     private List<Tweet> mTweets;
-    Context context; // Instance so that Glide can reference it
+    Context context;
     // pass in the Tweets array in the constructor
     public TweetAdapter(List<Tweet> tweets) {
         mTweets = tweets;
@@ -110,6 +111,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public ImageView ivRetweet;
         public ImageView ivFavorite;
         public ImageView ivReply;
+        public ImageView ivShare;
 
         public ViewHolder (View itemView) {
             super(itemView);
@@ -125,6 +127,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             ivRetweet = (ImageView) itemView.findViewById(R.id.ivRetweet);
             ivFavorite = (ImageView) itemView.findViewById(R.id.ivFavorite);
             ivReply = (ImageView) itemView.findViewById(R.id.ivReply);
+            ivShare = (ImageView) itemView.findViewById(R.id.ivShare);
         }
     }
 
@@ -135,16 +138,16 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         viewHolder.ivReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Reply to this tweet", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Reply to a tweet", Toast.LENGTH_LONG).show();
                 int position = viewHolder.getAdapterPosition();
                 // make sure the position is valid, i.e. actually exists in the view
                 if (position != RecyclerView.NO_POSITION) {
-                    // get the movie at the position, this won't work if the class is static
+                    // get the tweet at the position, this won't work if the class is static
                     Tweet tweet = mTweets.get(position);
                     Intent intent = new Intent(context, ReplyActivity.class);
-                    // serialize the movie using parceler, use its short name as a key
+                    // serialize the tweet using parceler, use its short name as a key
                     intent.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
-                    context.startActivity(intent);
+                    ((Activity) context).startActivityForResult(intent, REQUEST_CODE);
                 }
             }
         });
@@ -157,13 +160,71 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                 int position = viewHolder.getAdapterPosition();
                 // make sure the position is valid, i.e. actually exists in the view
                 if (position != RecyclerView.NO_POSITION) {
-                    // get the movie at the position, this won't work if the class is static
+                    // get the tweet at the position, this won't work if the class is static
                     Tweet tweet = mTweets.get(position);
                     Intent intent = new Intent(context, UserProfileActivity.class);
-                    // serialize the movie using parceler, could have passed user
+                    // serialize the tweet using parceler, could have passed user
                     intent.putExtra("user", Parcels.wrap(tweet.user));
                     context.startActivity(intent);
                 }
+            }
+        });
+
+        // User Name
+        viewHolder.tvUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Clicked on a profile user name", Toast.LENGTH_LONG).show();
+                int position = viewHolder.getAdapterPosition();
+                // make sure the position is valid, i.e. actually exists in the view
+                if (position != RecyclerView.NO_POSITION) {
+                    // get the tweet at the position, this won't work if the class is static
+                    Tweet tweet = mTweets.get(position);
+                    Intent intent = new Intent(context, UserProfileActivity.class);
+                    // serialize the tweet using parceler, could have passed user
+                    intent.putExtra("user", Parcels.wrap(tweet.user));
+                    context.startActivity(intent);
+                }
+            }
+        });
+
+        // Screen Name
+        viewHolder.tvScreenName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Clicked on a profile screen name", Toast.LENGTH_LONG).show();
+                int position = viewHolder.getAdapterPosition();
+                // make sure the position is valid, i.e. actually exists in the view
+                if (position != RecyclerView.NO_POSITION) {
+                    Tweet tweet = mTweets.get(position);
+                    Intent intent = new Intent(context, UserProfileActivity.class);
+                    intent.putExtra("user", Parcels.wrap(tweet.user));
+                    context.startActivity(intent);
+                }
+            }
+        });
+
+        // Like Image
+        viewHolder.ivFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Clicked on a like button", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        // Retweet Image
+        viewHolder.ivRetweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Clicked on a retweet button", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        // Share Image
+        viewHolder.ivShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Clicked on a share button", Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -1,6 +1,8 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -47,7 +49,7 @@ public class ReplyActivity extends AppCompatActivity {
 
         // Adds onClickListener to tweetButton and sends network request when clicked
         tweetButtonReply = (Button) findViewById(R.id.tweetButtonReply);
-        onTweetButtonClick();
+        onReplyButtonClick();
 
         // unwrap the movie passed in via intent, using its simple name as a key
         tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra(Tweet.class.getSimpleName()));
@@ -101,7 +103,7 @@ public class ReplyActivity extends AppCompatActivity {
     }
 
     // Sends tweet to network using JsonHttpResonseHandler
-    public void onTweetButtonClick() {
+    public void onReplyButtonClick() {
         tweetButtonReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +116,7 @@ public class ReplyActivity extends AppCompatActivity {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.d("onSuccess", "Tweet successfully sent");
                         Toast.makeText(getApplicationContext(),"Tweet successfully sent", Toast.LENGTH_SHORT).show();
-                        finish();
+                        returnTweet(tweet);
                     }
 
                     @Override
@@ -155,5 +157,15 @@ public class ReplyActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // Returns tweet in the intent as a result
+    public void returnTweet(Tweet tweet) {
+        // Prepare data intent
+        Intent data = new Intent();
+        // Pass tweet back
+        data.putExtra("tweet", (Parcelable) tweet);
+        setResult(RESULT_OK, data);
+        finish(); // Closes the activity, pass data to parent
     }
 }

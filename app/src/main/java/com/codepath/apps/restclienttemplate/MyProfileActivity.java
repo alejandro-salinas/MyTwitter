@@ -109,10 +109,10 @@ public class MyProfileActivity extends AppCompatActivity {
 
         // Followers Count
         tvFollowersCount = (TextView) findViewById(R.id.tvFollowersCount);
-        tvFollowersCount.setText("123");
+        tvFollowersCount.setText(user.followers_count);
 
         // Following Count
         tvFollowingCount = (TextView) findViewById(R.id.tvFollowingCount);
-        tvFollowingCount.setText("456");
+        tvFollowingCount.setText(user.following_count);
     }
 }

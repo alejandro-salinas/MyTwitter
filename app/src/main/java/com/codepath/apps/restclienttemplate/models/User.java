@@ -14,6 +14,8 @@ public class User {
     public String profileImageUrl;
     public String profileBannerUrl;
     public String description;
+    public String followers_count;
+    public String following_count;
 
     public User() {
 
@@ -36,6 +38,9 @@ public class User {
             image = image.substring(0, image.indexOf("normal.jpg")) + "bigger.jpg";
         }
         user.profileImageUrl = image;
+        user.followers_count = "" + json.getInt("followers_count");
+        user.following_count = "" + json.getInt("friends_count");
+
     return user;
     }
 }
