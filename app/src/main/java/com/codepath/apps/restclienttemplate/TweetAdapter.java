@@ -1,6 +1,5 @@
 package com.codepath.apps.restclienttemplate;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -25,9 +24,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> {
-
-    // Request code for intent
-    private final int REQUEST_CODE = 20;
 
     private List<Tweet> mTweets;
     Context context;
@@ -147,7 +143,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                     Intent intent = new Intent(context, ReplyActivity.class);
                     // serialize the tweet using parceler, use its short name as a key
                     intent.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
-                    ((Activity) context).startActivityForResult(intent, REQUEST_CODE);
+                    context.startActivity(intent);
                 }
             }
         });
